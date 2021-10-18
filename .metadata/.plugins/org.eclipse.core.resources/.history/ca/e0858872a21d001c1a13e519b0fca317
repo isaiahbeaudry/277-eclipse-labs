@@ -1,0 +1,55 @@
+
+/**
+ * CECS 378 Lab 1 Encryption
+ * @author Isaiah Beaudry
+ * @version 1.0 (Sep. 24, 2021)
+ */
+import java.util.*;
+
+public class Encryption {
+
+	/**
+	 * Main method
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		// Create scanner object to read input from user
+		Scanner sc = new Scanner(System.in);
+
+		// Prompt the user to enter the ciphertext and store it in a String variable
+		System.out.println("Please enter the ciphertext to decrypt:");
+		String line = sc.nextLine();
+
+		// Create char array from String line
+		char chars[] = line.toCharArray();
+
+		// Loop for 26 letter rotations
+		for (int i = 1; i < 27; i++) {
+			System.out.println("Decrypted text for the value: " + i);
+			
+			// Temp char array to store decrypted text
+			char temp[] = new char[chars.length]; 
+			
+			// Loop though the full list of chars
+			for (int j = 0; j < chars.length; j++) {
+				// Convert each char to an int
+				int char_index = (int) chars[j];
+				// If ASCII value after adding the i-value is greater than 122 (lower-case z),
+				// then restart numbering from 97 (lower-case a) again
+				if ((i + char_index) >= 123) {
+					temp[j] = (char) ((i + char_index) % 123 + 97);
+				} else {
+					temp[j] = (char) (i + char_index);
+				}
+			}
+			
+			// For-loop to print out the decrypted text
+			for (int j = 0; j < chars.length; j++) {
+				System.out.print(temp[j]);
+			}
+			System.out.println("\n");	// Separate each loop with newline
+		}
+	}
+}

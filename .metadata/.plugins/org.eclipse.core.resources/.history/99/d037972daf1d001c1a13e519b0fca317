@@ -1,0 +1,73 @@
+
+/**
+ * Lab 1 Part 2 Encryption
+ * @author isaiahbeaudry
+ * @version 1.0 (Sep. 24, 2021)
+ *
+ */
+
+import java.util.*;
+import java.io.*;
+
+public class Encryption {
+
+	// modified-alphabet key: zayisthegodublvmwprnqjfkcx
+
+	/**
+	 * Main method
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+
+		// Create scanner to read input from user
+		Scanner sc = new Scanner(System.in);
+
+		// Will be used for tempChar index
+		int char_index;
+
+		// Prompt for user input and store it in original_text
+		System.out.println("Please enter the text to encrypt: ");
+		String original_text = sc.nextLine();
+
+		// Prompt for user to input modified-alphabet key and store it in key
+		System.out.println("Please enter the key: ");
+		String key = sc.nextLine();
+
+		// Convert the key to char array
+		char[] keyArray = key.toCharArray();
+
+		// String buffer to store the encrypted ciphertext
+		StringBuffer ciphertext = new StringBuffer();
+
+		// Iterate through entire original_text
+		for (int i = 0; i < original_text.length(); i++) {
+			// tempChar will store the encrypted char
+			char tempChar;
+
+			// Check if the char is lower case
+			if (Character.isLowerCase(original_text.charAt(i))) {
+				// If char is lower case, then the ASCII values start at 97
+				// So, we can subtract 97 from the original ASCII value of the char to generate
+				// a new char
+				char_index = original_text.charAt(i) - 97;// New char index stored
+				tempChar = keyArray[char_index];// Assign tempChar to a variable
+			}
+			// Check if the char is upper case
+			else if (Character.isUpperCase(original_text.charAt(i))) {
+				// If char is in upper case, then the ASCII values start at 65
+				// So, we need to subtract 65 from the original ASCII value
+				char_index = original_text.charAt(i) - 65;
+				tempChar = Character.toUpperCase(keyArray[char_index]);// Assign tempChar to a variable
+			}
+			// If char is a space or any other non-alphabetical char
+			// Then we assign the original char to a new char variable
+			else {
+				tempChar = original_text.charAt(i);
+			}
+			ciphertext.append(tempChar);// Append the new char to ciphertext
+
+		}
+		System.out.println("Ciphertext is :\n" + ciphertext.toString()); // Print the ciphertext as a string
+	}
+}

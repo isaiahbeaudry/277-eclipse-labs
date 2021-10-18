@@ -1,0 +1,72 @@
+
+/**
+ * Lab 1 Part 2 Decryption
+ * @author isaiahbeaudry
+ * @version 1.0 (Sep. 24, 2021)
+ *
+ */
+
+import java.util.*;
+import java.io.*;
+
+public class Decryption {
+	
+	// modified-alphabet key: zayisthegodublvmwprnqjfkcx
+
+	/**
+	 * Main method
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		// Create scanner to read input from user
+		System.out.println("enter string to decrypt: ");
+		Scanner input = new Scanner(System.in);
+		int index;
+
+		// getting user input and storing it in a variable
+		String cipher = input.nextLine();
+
+		// getting key input from the user to encrypt plain text. This should be of
+		// length 26
+		System.out.println("Enter key to decrypt(length should be 26): ");
+		String key = input.nextLine();
+
+		// converting string into character array
+		char[] keyArray = key.toCharArray();
+
+		// stringbuffer object to store decrypted cipher
+		StringBuffer plaintext = new StringBuffer();
+
+		// Iterating over cipher text upto its length
+		for (int i = 0; i < cipher.length(); i++) {
+			char newChar;// variable to store plaintext character
+			// if character is lowercase
+			if (Character.isLowerCase(cipher.charAt(i))) {
+				// If character is lowercase then its ASCII values start from 97
+				// So, we need to substract 97 from original ASCII value of character in order
+				// to get respective plaitext character
+				index = cipher.charAt(i) - 97;// new character index is obtained here
+				newChar = keyArray[index];// assigning new character to a variable
+			}
+			// checking if the character is upppercase
+			else if (Character.isUpperCase(cipher.charAt(i))) {
+				// If character is in uppercase then its ASCII values start from 65
+				// So, we need to substract 65 from the original ASCII value of character in
+				// order to get respective plaitext character
+				index = cipher.charAt(i) - 65;// new character index is obtained here
+				newChar = Character.toUpperCase(keyArray[index]);// assigning new character to a variable
+			}
+			// if character is space or any other non alphabetical character
+			else {
+				// then we simply assign the original character to new character variable
+				newChar = cipher.charAt(i);
+			}
+			plaintext.append(newChar);//// appending the new character to plaintext buffer
+
+		}
+		System.out.println("Plain text is :\n" + plaintext.toString());// printing the plaintext in String format
+	}
+
+}

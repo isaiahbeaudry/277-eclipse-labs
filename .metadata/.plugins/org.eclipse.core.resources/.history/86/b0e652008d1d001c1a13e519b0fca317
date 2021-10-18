@@ -1,0 +1,38 @@
+
+/**
+ * @author isaiahbeaudry
+ *
+ */
+import java.util.*;
+
+/**
+ * Encryption method
+ *
+ */
+public class Encryption {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Please enter the text:");
+		String line = sc.nextLine();
+		char chars[] = line.toCharArray();
+		for (int i = 1; i < 27; i++) {
+			System.out.println("Decrypted text for the value: " + i);
+			char temp[] = new char[chars.length];
+			for (int j = 0; j < chars.length; j++) {
+				int index = (int) chars[j];
+				/*
+				 * if ascii value after adding a key(here i-value) is greater than 122, then
+				 * restart numbering from 97 again
+				 */ if ((i + index) >= 123) {
+					temp[j] = (char) ((i + index) % 123 + 97);
+				} else {
+					temp[j] = (char) (i + index);
+				}
+			}
+			for (int j = 0; j < chars.length; j++) {
+				System.out.print(temp[j]);
+			}
+			System.out.println("\n");
+		}
+	}
+}
